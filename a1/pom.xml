@@ -7,12 +7,18 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <url>http://familysearch.org</url>
+  <!-- This causes 'mvn package' to run a bunch of (old?) stuff i don't want to debug now:
   <parent>
     <groupId>org.familysearch</groupId>
     <artifactId>root</artifactId>
     <version>1.8</version>
   </parent>
+  -->
   <properties>
+    <jdkVersion>1.6</jdkVersion>
+    <!-- encoding as per http://blog.vinodsingh.com/2009/04/encoding-warning-with-maven-210.html  -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
     <project.build.environment>../a1-config/references/localhost</project.build.environment>
     <cargo.debug.startup>n</cargo.debug.startup>
     <serviceId>callla</serviceId>
@@ -20,6 +26,15 @@
   <build>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>2.3.2</version>
+          <configuration>
+            <source>${jdkVersion}</source>
+            <target>${jdkVersion}</target>
+          </configuration>
+        </plugin>
         <plugin>
           <groupId>org.familysearch.cm.plugins</groupId>
           <artifactId>cm-package-plugin</artifactId>
