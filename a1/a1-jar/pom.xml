@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>g1</groupId>
+  <artifactId>a1-jar</artifactId>
+  <name>Jar sub-module project</name>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <url>http://familysearch.org</url>
+  <parent>
+    <groupId>g1</groupId>
+    <artifactId>a1</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+</project>

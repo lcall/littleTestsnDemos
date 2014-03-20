@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>g1</groupId>
+  <artifactId>a1-webapp</artifactId>
+  <name>War sub-module project</name>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <parent>
+    <groupId>g1</groupId>
+    <artifactId>a1</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <properties>
+    <project.build.environment>../a1-config/references/localhost</project.build.environment>
+    <cargo.debug.startup>n</cargo.debug.startup>
+  </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.familysearch.cm.plugins</groupId>
+        <artifactId>cm-package-plugin</artifactId>
+        <configuration>
+          <hostClasses>
+            <!-- replace this with the correct host class for your project -->
+            <hostClass>app</hostClass>
+          </hostClasses>
+          <template>war</template>
+          <types>
+            <type>deb</type>
+          </types>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.cargo</groupId>
+        <artifactId>cargo-maven2-plugin</artifactId>
+        <version>1.0.5</version>
+        <configuration>
+          <container>
+            <containerId>tomcat6x</containerId>
+            <zipUrlInstaller>
+              <url>
+                http://mvn.usys.org/nexus/service/local/repositories/approved/content/org/apache/tomcat/apache-tomcat/6.0.18/apache-tomcat-6.0.18.zip
+              </url>
+              <installDir>${basedir}/cargo-installs</installDir>
+            </zipUrlInstaller>
+            <append>false</append>
+            <dependencies>
+              <dependency>
+                <location>${project.build.environment}</location>
+              </dependency>
+            </dependencies>
+          </container>
+          <configuration>
+            <properties>
+              <cargo.jvmargs>-Xdebug -Xnoagent -Djava.compiler=NONE
+                -Xrunjdwp:transport=dt_socket,server=y,suspend=${cargo.debug.startup},address=5005
+              </cargo.jvmargs>
+              <cargo.logging>high</cargo.logging>
+              <cargo.servlet.port>8080</cargo.servlet.port>
+            </properties>
+            <home>${project.build.directory}/tomcat6x</home>
+            <deployables>
+              <deployable>
+                <properties>
+                  <!-- Replace this with the name of your webapp -->
+                  <context>a1-webapp</context>
+                </properties>
+              </deployable>
+            </deployables>
+          </configuration>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+</project>

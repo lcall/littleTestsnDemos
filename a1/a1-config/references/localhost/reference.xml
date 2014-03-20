@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reference id="build">
+  <service id="monitoring">
+    <!--
+    Uncomment for sending an event to a local app-monitoring box during unit tests
+    <host id="localhost">
+      <class id="app-monitoring"/>
+      <network partition="sigma" address="127.0.0.1"/>
+    </host>
+    -->
+  </service>
+</reference>
+

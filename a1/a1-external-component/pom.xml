@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>a1</artifactId>
+    <groupId>g1</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <groupId>g1</groupId>
+  <artifactId>a1-external-component</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>multi-module-external-component</name>
+  <description>This is an example of an external component.</description>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>get-app</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <!-- The example uses the jar from the current project. 
+              This should be changed to the the coordinates of the artifact you want to use -->
+              <artifactItems>
+                <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>a1-runnable-jar</artifactId>
+                  <version>${project.version}</version>
+                  <classifier>runnable</classifier>
+                  <type>zip</type>
+                  <outputDirectory>${project.build.directory}</outputDirectory>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.familysearch.cm.plugins</groupId>
+        <artifactId>cm-package-plugin</artifactId>
+        <configuration>
+          <template>app</template>
+          <hostClasses>
+            <!-- replace this with the correct host class for your project -->
+            <hostClass>app</hostClass>
+          </hostClasses>
+          <types>
+            <type>deb</type>
+          </types>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>a1-runnable-jar</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+</project>

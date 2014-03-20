@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <!-- IMPORTANT: avoid modifying this file as it is generated in a way that will work with the CM config packaging and deployment tools. -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>g1</groupId>
+  <!-- Make sure this artifactId matches the module directory name, for .deb creation process to find it on the mvn repo server.-->
+  <artifactId>a1-config</artifactId>
+  <name>Multi-module project configuration data</name>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <url>http://familysearch.org</url>
+  <parent>
+    <groupId>g1</groupId>
+    <artifactId>a1</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.familysearch.cm.plugins</groupId>
+        <artifactId>cm-package-plugin</artifactId>
+        <configuration>
+          <template>config</template>
+          <types>
+            <type>deb</type>
+          </types>
+        </configuration>
+      </plugin>
+    </plugins>
+    <resources>
+      <!-- for clarity, put the config files in references (instead of src/main/resources) -->
+      <resource>
+        <directory>references</directory>
+      </resource>
+    </resources>
+  </build>
+</project>

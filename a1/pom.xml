@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>g1</groupId>
+  <artifactId>a1</artifactId>
+  <name>Multi-module project</name>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <url>http://familysearch.org</url>
+  <parent>
+    <groupId>org.familysearch</groupId>
+    <artifactId>root</artifactId>
+    <version>1.8</version>
+  </parent>
+  <properties>
+    <project.build.environment>../a1-config/references/localhost</project.build.environment>
+    <cargo.debug.startup>n</cargo.debug.startup>
+    <serviceId>callla</serviceId>
+  </properties>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.familysearch.cm.plugins</groupId>
+          <artifactId>cm-package-plugin</artifactId>
+          <version>2.9.0</version>
+          <configuration>
+            <serviceId>${serviceId}</serviceId>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>5.12.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <modules>
+    <module>a1-jar</module>
+    <module>a1-webapp</module>
+    <module>a1-config</module>
+    <module>a1-runnable-jar</module>
+    <module>a1-external-component</module>
+  </modules>
+</project>
