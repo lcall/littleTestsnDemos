@@ -121,6 +121,9 @@ public class App {
     System.out.println("And #11?? on a 99-fingered man? " + FingerType.whaddyaCallThisOne(11, 99));
     // */
 
+
+
+    // 13)  and also see 13) elsewhere
     System.out.println();
     System.out.println();
     System.out.println();
@@ -137,6 +140,7 @@ public class App {
 
 
 
+    // 20) 
     // json/logging:
     // (NOW I see that I could probably do the json conversion in log4j.xml itself and that would prob'ly be better, in real life, as for one it
     // would get the level properly into the output.)
@@ -193,34 +197,48 @@ public class App {
   }
 
 
+  // 10)  composition:
+  //        pro
+  //          avoids 'diamond problem' if you want multiple inheritance (to get features from multiple other classes)
+  //          avoids bringing in things you don't want, but inheritance. forces you to get: like security issues.  (?)
+  //          allows passing in the composed classes at runtime as parms, adding flexibility.
+      //inheritance
+      //  if that's really where the behavior belongs: part of the fundamental nature of the superclass, it seems to make sense (ie,
+      //  'is-a' relationship holds in all cases.
+      //  fragile base class problem: adding method to parent can break subclasses
+      //
+      //static methods
+      //  less flexible (unless they're on the composed methods, not the parent class?)
+      //    harder to mock? (unless using jmockit?)
+      //  (can accumulate in memory?...not ephemeral when no longer used?)
   public class ThirdPartyFileOpener {
     public final void openFile() {
       System.out.println("opening a file");
     }
-    // compiler won't allow inner classes w/ static methods:
+    // compiler won't allow inner classes w/ **************static methods:
     //public static void open2Files() {
     //  System.out.println("opening 2 files");
     //}
   }
   public class XMLThing {
     private ThirdPartyFileOpener myFileOpener;
-    // composition:
+    // **************composition:
     XMLThing(ThirdPartyFileOpener fo) {
       myFileOpener = fo;
     }
-    // alternative "composition"?: could pass in something else ...
+    // **************alternative "composition"?: could pass in something else ...
     public void writeIt(ThirdPartyFileOpener fo1) {
       fo1.openFile();
     }
     public void writeOther() {
       try {
-        //static:
+        //**************static:
         File.createTempFile("x", ".txt");
       } catch (IOException e) {
         e.printStackTrace();
       }
     }
-    // inheritance:
+    // **************inheritance:
     // now TextThing cannot extend anything else (except by composition). Plus it isn't really
     // a kind of FileOpener .
     public class TextThing extends ThirdPartyFileOpener {
@@ -236,14 +254,14 @@ public class App {
       }
     }
     public void writeMore() {
-      // composition:
+      // **************composition:
       myFileOpener.openFile();
     }
   }
 
 
 
-  //constructor chaining...
+  //  11) constructor chaining...
   class Chained {
     private int a,b,c,d;
     Chained(int bIn, int cIn, int dIn) {
@@ -262,7 +280,7 @@ public class App {
   }
 
 
-  //encapsulation: bad/good
+  //  12) encapsulation: bad/good
   public class InterruptController {
     public void doManyOperationsOnThePCIBus() {
       System.out.println("very busy here, working hard");
@@ -293,7 +311,7 @@ public class App {
     AudioDevice2() {
       interruptController = new InterruptController();
     }
-    // 2 overloaded methods:
+    // 15)  two overloaded methods:
     // plus: proliferation/verbosity/complexity in namespace?
     // minus: otherwise you can have messy methods with the bad smell of too many if's/case expressions?
     public void doIt() {
@@ -320,7 +338,7 @@ public class App {
   }
 
 
-
+  // 13)  and also see 13) elsewhere
   static void showParameterBehavior(ArrayList list, int changed, final int cantChange) {
     list.set(0,"5678");
     changed = 99;
