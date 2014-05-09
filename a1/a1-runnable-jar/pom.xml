@@ -100,4 +100,36 @@
       </resource>
     </resources>
   </build>
-</project>
+  
+  <profiles>
+    <profile>
+      <id>test</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+      <plugins>
+        <plugin>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.7</version>
+          <executions>
+            <execution>
+              <phase>test</phase>
+              <configuration>
+                <target>
+                  <echo message="***************************"/>
+                  <echo message="      hello from ant and a profile."/>
+                  <echo message="***************************"/>
+                </target>
+              </configuration>
+              <goals>
+                <goal>run</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+     </build>
+    </profile>
+  </profiles>
+ </project>
